@@ -1,0 +1,19 @@
+---
+driver:
+  name: docker
+  options:
+    requirements-file: requirements.yml
+platforms:
+  - name: kube-bench-${MOLECULE_VERSION:-v1.33.2}
+    image: kindest/node:${MOLECULE_VERSION:-v1.33.2}
+    privileged: true
+    published_ports: 127.0.0.1:${TEST_CLUSTER_PORT:-8443}:8443/tcp
+    pre_build_image: yes
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+    verify: ${MOLECULE_VERIFY_PLAYBOOK:-verify.yml}
+  config_options:
+    defaults:
+      callback_result_format: yaml
