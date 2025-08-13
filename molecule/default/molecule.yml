@@ -4,9 +4,11 @@ driver:
   options:
     requirements-file: requirements.yml
 platforms:
-  - name: kube-bench-${MOLECULE_VERSION:-v1.33.2}
-    image: kindest/node:${MOLECULE_VERSION:-v1.33.2}
+  - name: kube-bench-${MOLECULE_VERSION:-develop}
+    image: spatterlight/kind:${MOLECULE_VERSION:-develop}
+    override_command: false
     privileged: true
+    cgroupns_mode: host
     published_ports: 127.0.0.1:${TEST_CLUSTER_PORT:-8443}:8443/tcp
     pre_build_image: yes
 provisioner:
