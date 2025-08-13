@@ -1,0 +1,14 @@
+---
+# The version of kube-bench to run
+kube_bench_version: v0.11.2
+
+# Controls where the kube-bench manifests to apply are obtained
+#   local = from the local filesystem, see templates/
+#   remote = clones the `kube_bench_repository_url` (requires internet) (useful for newer manifest versions if the role hasn't been updated yet)
+kube_bench_get_job_manifests: local
+
+# Which kube-bench manifests to apply to the Kubernetes cluster
+# See the upstream documentation for more information on why you might want to change this:
+# https://github.com/aquasecurity/kube-bench/blob/main/docs/running.md#running-in-a-kubernetes-cluster
+kube_bench_manifests_to_apply:
+    - job.yaml
