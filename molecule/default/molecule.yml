@@ -5,7 +5,7 @@ driver:
     requirements-file: requirements.yml
 platforms:
   - name: kube-bench
-    image: spatterlight/kind:${MOLECULE_VERSION:-v1.0.0}
+    image: spatterlight/kind-molecule:${MOLECULE_VERSION:-v1.0.0}
     override_command: false
     privileged: true
     cgroupns_mode: host
