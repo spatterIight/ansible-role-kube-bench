@@ -4,8 +4,8 @@ driver:
   options:
     requirements-file: requirements.yml
 platforms:
-  - name: kube-bench-${MOLECULE_VERSION:-develop}
-    image: spatterlight/kind:${MOLECULE_VERSION:-develop}
+  - name: kube-bench
+    image: spatterlight/kind:${MOLECULE_VERSION:-v1.0.0}
     override_command: false
     privileged: true
     cgroupns_mode: host
@@ -19,3 +19,7 @@ provisioner:
   config_options:
     defaults:
       callback_result_format: yaml
+  inventory:
+    group_vars:
+      all:
+        kube_bench_fail_on_failing_tests: false

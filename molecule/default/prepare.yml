@@ -1,0 +1,15 @@
+---
+- name: Prepare
+  hosts: all
+  become: false
+  gather_facts: true
+  tasks:
+    - name: Create the Kubernetes cluster with kind
+      ansible.builtin.shell: kind create cluster
+
+    - name: Wait until all nodes are ready
+      ansible.builtin.shell: kubectl get nodes --no-headers
+      register: kubectl_get_nodes
+      until: kubectl_get_nodes.stdout_lines | select('match', '.*\\s+Ready\\s+.*') | list | length == kubectl_get_nodes.stdout_lines | length
+      retries: 15
+      delay: 10
