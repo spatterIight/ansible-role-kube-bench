@@ -13,4 +13,3 @@ collections:
   - name: https://github.com/ansible-collections/kubernetes.core.git
     type: git
     version: 6.1.0
-
