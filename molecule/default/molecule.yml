@@ -1,0 +1,39 @@
+---
+driver:
+  name: docker
+  options:
+    requirements-file: requirements.yml
+platforms:
+  - name: kube-bench
+    image: spatterlight/kind-molecule:${MOLECULE_VERSION:-v1.0.0}
+    override_command: false
+    privileged: true
+    cgroupns_mode: host
+    published_ports: 127.0.0.1:${TEST_CLUSTER_PORT:-8443}:8443/tcp
+    pre_build_image: true
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+    verify: ${MOLECULE_VERIFY_PLAYBOOK:-verify.yml}
+  config_options:
+    defaults:
+      callback_result_format: yaml
+  inventory:
+    group_vars:
+      all:
+        kube_bench_fail_on_failing_tests: false
+scenario:
+  test_sequence:
+    - dependency
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    # - idempotence
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
