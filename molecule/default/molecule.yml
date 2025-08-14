@@ -23,3 +23,18 @@ provisioner:
     group_vars:
       all:
         kube_bench_fail_on_failing_tests: false
+scenario:
+  test_sequence:
+    - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    # - idempotence
+    - side_effect
+    - verify
+    - cleanup
+    - destroy

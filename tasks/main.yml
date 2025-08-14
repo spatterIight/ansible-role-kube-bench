@@ -96,7 +96,6 @@
     namespace: default
   when: item.resources is defined
   loop: "{{ kube_bench_pods.results }}"
-  tags: molecule-idempotence-notest
 
 - name: Check for failing security tests in kube-bench logs
   ansible.builtin.fail:
