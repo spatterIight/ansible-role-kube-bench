@@ -9,7 +9,6 @@ platforms:
     override_command: false
     privileged: true
     cgroupns_mode: host
-    published_ports: 127.0.0.1:${TEST_CLUSTER_PORT:-8443}:8443/tcp
     pre_build_image: true
 provisioner:
   name: ansible
