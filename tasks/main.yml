@@ -15,7 +15,6 @@
     namespace: default
     definition: "{{ lookup('template', 'templates/' + item + '.j2') | from_yaml }}"
   loop: "{{ kube_bench_manifests_to_apply }}"
-  tags: molecule-idempotence-notest
 
 - name: Wait for the kube-bench jobs to complete
   kubernetes.core.k8s_info:
@@ -84,7 +83,6 @@
     namespace: default
     definition: "{{ lookup('template', 'templates/' + item + '.j2') | from_yaml }}"
   loop: "{{ kube_bench_manifests_to_apply }}"
-  tags: molecule-idempotence-notest
 
 - name: Delete kube-bench pods
   no_log: "{{ kube_bench_misc_no_log }}"
