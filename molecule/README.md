@@ -10,16 +10,6 @@ pip3 install -r requirements.yml
 
 # Execution
 
-Ubuntu 24.04:
 ```bash
-MOLECULE_DISTRO=ubuntu2404 molecule test --scenario-name stroke
-
-MOLECULE_DISTRO=ubuntu2404 molecule test --scenario-name vici
-```
-
-Ubuntu 22.04:
-```bash
-MOLECULE_DISTRO=ubuntu2204 molecule test --scenario-name stroke
-
-MOLECULE_DISTRO=ubuntu2204 molecule test --scenario-name vici
+molecule test
 ```
