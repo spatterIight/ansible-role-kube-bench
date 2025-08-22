@@ -1,7 +1,7 @@
 ---
 # The version of kube-bench to run
 # renovate: datasource=docker depName=docker.io/aquasec/kube-bench versioning=semver
-kube_bench_version: v0.11.2
+kube_bench_version: v0.12.0
 
 # Which kube-bench manifests to apply to the Kubernetes cluster
 # See the upstream documentation for more information on why you might want to change this:
