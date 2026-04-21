@@ -10,6 +10,5 @@ roles: []
 ###############
 
 collections:
-  - name: https://github.com/ansible-collections/kubernetes.core.git
-    type: git
+  - name: kubernetes.core
     version: 6.1.0
