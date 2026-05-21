@@ -8,7 +8,7 @@ source venv/bin/activate
 pip3 install -r requirements.yml
 ```
 
-# Execution
+## Execution
 
 ```bash
 molecule test

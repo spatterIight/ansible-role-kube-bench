@@ -1,6 +1,9 @@
+# SPDX-FileCopyrightText: 2025 spatterlight
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 ---
 # This is required to force the job to re-run
-# Job manifests must be used since thats what upstream uses,
+# Job manifests must be used since that's what upstream uses,
 # and I don't want to manually maintain equivalent pod definitions
 - name: Delete the kube-bench job definitions from the server
   kubernetes.core.k8s:

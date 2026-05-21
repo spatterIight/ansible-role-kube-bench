@@ -12,7 +12,7 @@ An Ansible role to easily facilitate running [kube-bench](https://github.com/aqu
 ## Role Variables
 
 | Variable | Default | Description |
-|----------|---------|-------------|
+| ---------- | --------- | ------------- |
 | `kube_bench_version` | See `defaults/main.yml` | The version of kube-bench to run |
 | `kube_bench_manifests_to_apply` | `[job.yaml]` | Which kube-bench manifests to apply to the Kubernetes cluster. See the [upstream documentation](https://github.com/aquasecurity/kube-bench/blob/main/docs/running.md#running-in-a-kubernetes-cluster) for more information on why you might want to change this |
 | `kube_bench_fail_on_failing_tests` | `true` | Controls whether Ansible should invoke `ansible.builtin.fail` if any kube-bench tests fail |

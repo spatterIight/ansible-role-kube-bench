@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025 spatterlight
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 ---
 # The version of kube-bench to run
 # renovate: datasource=docker depName=docker.io/aquasec/kube-bench versioning=semver
@@ -9,7 +12,7 @@ kube_bench_version: v0.15.4
 kube_bench_manifests_to_apply:
     - job.yaml
 
-# Controls whether Ansible shoudl invoke `ansible.builtin.fail` if any kube-bench tests fail
+# Controls whether Ansible should invoke `ansible.builtin.fail` if any kube-bench tests fail
 kube_bench_fail_on_failing_tests: true
 
 # Controls whether Ansible should delete the completed kube-bench pods
