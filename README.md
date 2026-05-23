@@ -19,6 +19,8 @@ An Ansible role to easily facilitate running [kube-bench](https://github.com/aqu
 | `kube_bench_cleanup_pods` | `true` | Controls whether Ansible should delete the completed kube-bench pods |
 | `kube_bench_misc_no_log` | `true` | Due to Ansible limitations regarding loops many of the tasks output an incredible amount of text, to resolve this they implement `no_log`. However, if a task has some error this obscures the error. In this case, set this variable to false |
 
-## Testing with Molecule
+## Molecule
 
-See [molecule/README.md](molecule/README.md)
+This role supports [Molecule](https://docs.ansible.com/projects/molecule/), an Ansible testing framework designed for developing and testing Ansible collections, playbooks, and roles.
+
+Refer to [this page](./molecule/README.md) for details about how to utilize it.

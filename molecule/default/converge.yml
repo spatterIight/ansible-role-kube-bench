@@ -2,11 +2,11 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 ---
-- name: Converge
+- name: Include role for kube-bench Molecule tests
   hosts: all
   become: false
   gather_facts: true
   tasks:
-    - name: Include kube-bench role
+    - name: Include role for kube-bench Molecule tests
       ansible.builtin.include_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
