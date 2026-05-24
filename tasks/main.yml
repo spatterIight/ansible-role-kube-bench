@@ -103,5 +103,5 @@
     msg: "CIS Kubernetes Benchmark Failed: kube-bench scan found failing security tests. Review the logs above for details."
   when:
     - kube_bench_results is defined
-    - kube_bench_results | join('\n\n') | regex_search('[1-9][0-9]* checks FAIL')
+    - kube_bench_results | join('\n\n') | regex_search('[1-9][0-9]* checks FAIL') is not none
     - kube_bench_fail_on_failing_tests
