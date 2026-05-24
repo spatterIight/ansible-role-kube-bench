@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025 spatterlight
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
 ---
 driver:
   name: docker
@@ -5,7 +8,7 @@ driver:
     requirements-file: requirements.yml
 platforms:
   - name: kube-bench
-    image: spatterlight/kind-molecule:${MOLECULE_VERSION:-v1.0.0}
+    image: spatterlight/kind-molecule:v1.0.0
     override_command: false
     privileged: true
     cgroupns_mode: host
@@ -22,6 +25,9 @@ provisioner:
     group_vars:
       all:
         kube_bench_fail_on_failing_tests: false
+  env:
+    # Workaround for https://github.com/ansible/molecule/issues/4391
+    ANSIBLE_ROLES_PATH: ${MOLECULE_PROJECT_DIRECTORY}/..:/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles:~/.ansible/roles
 scenario:
   test_sequence:
     - dependency
