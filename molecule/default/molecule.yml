@@ -25,6 +25,9 @@ provisioner:
     group_vars:
       all:
         kube_bench_fail_on_failing_tests: false
+  env:
+    # Workaround for https://github.com/ansible/molecule/issues/4391
+    ANSIBLE_ROLES_PATH: ${MOLECULE_PROJECT_DIRECTORY}/..:/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles:~/.ansible/roles
 scenario:
   test_sequence:
     - dependency
