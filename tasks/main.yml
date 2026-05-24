@@ -5,21 +5,21 @@
 # This is required to force the job to re-run
 # Job manifests must be used since that's what upstream uses,
 # and I don't want to manually maintain equivalent pod definitions
-- name: Delete the kube-bench job definitions from the server
+- name: Ensure kube-bench job definitions do not exist
   kubernetes.core.k8s:
     state: absent
     namespace: default
     definition: "{{ lookup('template', 'templates/' + item + '.j2') | from_yaml }}"
   loop: "{{ kube_bench_manifests_to_apply }}"
 
-- name: Apply the kube-bench job definitions to the server
+- name: Ensure kube-bench job definitions are applied
   kubernetes.core.k8s:
     state: present
     namespace: default
     definition: "{{ lookup('template', 'templates/' + item + '.j2') | from_yaml }}"
   loop: "{{ kube_bench_manifests_to_apply }}"
 
-- name: Wait for the kube-bench jobs to complete
+- name: Ensure kube-bench jobs have completed
   kubernetes.core.k8s_info:
     api_version: batch/v1
     kind: Job
@@ -33,7 +33,7 @@
   register: kube_bench_jobs
   loop: "{{ kube_bench_manifests_to_apply }}"
 
-- name: Get pods created by kube-bench jobs
+- name: Check pods created by kube-bench jobs
   kubernetes.core.k8s_info:
     api_version: v1
     kind: Pod
@@ -42,7 +42,7 @@
   register: kube_bench_pods
   loop: "{{ kube_bench_manifests_to_apply }}"
 
-- name: Get logs from kube-bench pods
+- name: Check kube-bench pod logs
   no_log: "{{ kube_bench_misc_no_log }}"
   kubernetes.core.k8s_log:
     api_version: v1
@@ -67,11 +67,11 @@
   when: item is defined and item.log is defined
   loop: "{{ kube_bench_logs.results }}"
 
-- name: Display kube-bench results
+- name: Print kube-bench results
   ansible.builtin.debug:
     msg: "{{ kube_bench_results | join('\n\n') }}"
 
-- name: Check if any jobs failed
+- name: Print kube-bench job failure warning
   no_log: "{{ kube_bench_misc_no_log }}"
   ansible.builtin.debug:
     msg: "WARNING: A kube-bench job may have failed or is still running"
@@ -80,14 +80,14 @@
     (item.resources[0].status.conditions | selectattr('type', 'equalto', 'Failed') | list | length > 0)
   loop: "{{ kube_bench_jobs.results }}"
 
-- name: Delete the kube-bench job definitions from the server
+- name: Ensure kube-bench job definitions do not exist
   kubernetes.core.k8s:
     state: absent
     namespace: default
     definition: "{{ lookup('template', 'templates/' + item + '.j2') | from_yaml }}"
   loop: "{{ kube_bench_manifests_to_apply }}"
 
-- name: Delete kube-bench pods
+- name: Ensure kube-bench pods do not exist
   no_log: "{{ kube_bench_misc_no_log }}"
   kubernetes.core.k8s:
     state: absent
@@ -98,7 +98,7 @@
   when: item.resources is defined
   loop: "{{ kube_bench_pods.results }}"
 
-- name: Check for failing security tests in kube-bench logs
+- name: Fail if kube-bench logs contain failing security tests
   ansible.builtin.fail:
     msg: "CIS Kubernetes Benchmark Failed: kube-bench scan found failing security tests. Review the logs above for details."
   when:
